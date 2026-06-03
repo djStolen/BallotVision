@@ -1,0 +1,5 @@
+# Core dependencies for our pipeline
+opencv-python-headless
+numpy
+pandas
+
