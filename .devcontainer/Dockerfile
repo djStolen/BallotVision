@@ -16,6 +16,17 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     graphviz \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libgomp1 \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Create a non-root user (Standard best practice for Devcontainers)
 ARG USERNAME=devuser
 ARG USER_UID=1000
@@ -35,4 +46,3 @@ ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
 
 # Install core Python testing and formatting tools
 RUN pip install --user --no-cache-dir pytest pytest-cov black flake8
-
