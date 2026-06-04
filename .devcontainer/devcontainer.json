@@ -14,6 +14,13 @@
             ]
         }
     },
-    "postCreateCommand": "pip install -r requirements.txt"
+    // FIX: Retain downloaded wheels across container destructions/rebuilds
+    "mounts": [
+      {
+        "source": "ballotvision-pip-cache",
+        "target": "/home/devuser/.cache/pip",
+        "type": "volume"
+      }
+    ],
+    "postCreateCommand": "sudo chown -R devuser:devuser /home/devuser/.cache && pip install -r requirements.txt"
 }
-

@@ -1,6 +1,6 @@
 # BallotVision
 
-BallotVision is an automated verification tool designed to ensure the integrity of election protocol data. By using image processing (OCR) and mathematical rule validation, it detects inconsistencies in scanned election documents (*Записник*).
+BallotVision is an automated verification tool designed to ensure the integrity of election protocol data. By using image processing (OCR) and mathematical rule validation, it detects inconsistencies in scanned election documents.
 
 ## Getting Started
 
@@ -32,15 +32,29 @@ We use a central `run.sh` script to manage the development lifecycle. This scrip
 
 ```text
 BallotVision/
-├── .devcontainer/      # Container configuration
+├── .devcontainer/
+│   └── Dockerfile               # Local development container configuration
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # GitHub Actions continuous integration pipeline
 ├── src/
-│   └── ballot_vision/  # Source code
-│       ├── core/       # Data models and logic
-│       └── validation/ # Validation rules (ProtocolValidator)
-├── tests/              # Pytest suites and fixtures
-├── docs/               # Documentation output
-├── run.sh              # Project control script
-└── pyproject.toml      # Project metadata and pytest configuration
+│   └── ballot_vision/
+│       ├── __init__.py
+│       ├── core/
+│       │   └── models.py        # Core data models (ElectionProtocol, etc.)
+│       ├── ocr/
+│       │   ├── base.py          # Abstract base class for OCR engines
+│       │   └── paddle_engine.py # PaddleOCR engine implementation with memory fixes
+│       └── validation/
+│           └── rules.py         # Business logic validation rules for protocols
+├── tests/
+│   ├── test_environment.py      # Basic environment verification tests
+│   ├── test_ocr.py              # OCR engine initialization and processing tests
+│   └── testfiles/               # Sample ballot PDFs and generated OCR data
+├── pyproject.toml               # Tooling configs (pytest/coverage) & package metadata
+├── requirements.txt             # Pinned package dependency list for CI and environments
+├── process_files.py             # Batch CLI tool to run OCR over a target folder
+└── run.sh                       # Automation script for running the test suite
 ```
 
 # Testing

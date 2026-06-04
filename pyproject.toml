@@ -1,3 +1,7 @@
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-
+dependencies = [
+    "paddleocr",
+    "pymupdf",
+    "opencv-python-headless",
+]
