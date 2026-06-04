@@ -1,7 +1,10 @@
 name: Run Ballot OCR Processing
 
 on:
-  workflow_dispatch: # Allows you to manually trigger this from the GitHub UI whenever you want
+  workflow_dispatch: # Keeps the manual button ready for later
+  push:
+    branches:
+      - '*'        # Triggers automatically on a push to ANY branch (including yours)
 
 jobs:
   process-ballots:
