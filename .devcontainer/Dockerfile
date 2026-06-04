@@ -16,6 +16,13 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     graphviz \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install libgomp1
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
 # Create a non-root user (Standard best practice for Devcontainers)
 ARG USERNAME=devuser
 ARG USER_UID=1000
@@ -35,4 +42,3 @@ ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
 
 # Install core Python testing and formatting tools
 RUN pip install --user --no-cache-dir pytest pytest-cov black flake8
-

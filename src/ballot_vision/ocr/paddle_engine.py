@@ -4,8 +4,8 @@ from typing import List, Dict, Any
 
 class PaddleOCREngine(OCREngine):
     def __init__(self, lang: str = 'rs_latin'):
-        # Initialize PaddleOCR with the specific language model
-        self.ocr = PaddleOCR(use_angle_cls=True, lang=lang)
+        # Updated parameter to match newer PaddleOCR versions
+        self.ocr = PaddleOCR(use_textline_orientation=True, lang=lang)
 
     def extract_text(self, image_path: str) -> List[Dict[str, Any]]:
         """
