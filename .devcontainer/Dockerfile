@@ -16,12 +16,15 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     graphviz \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install libgomp1
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     libgomp1 \
     libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user (Standard best practice for Devcontainers)
