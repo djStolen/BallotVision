@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     # This instructs GitHub to pull your devcontainer Dockerfile 
     # and run the job steps inside that environment
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     container:
       image: python:3.10-slim # Use the same base image as your devcontainer
     
