@@ -14,8 +14,8 @@ This project utilizes a containerized development environment via **DevPod** to 
 1.  Clone the repository.
 2.  Make the control script executable:
 ```bash
-    chmod +x run.sh
-    ```
+chmod +x run.sh
+```
 
 ## Development Workflow
 
