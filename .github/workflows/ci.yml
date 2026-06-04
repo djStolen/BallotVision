@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # This instructs GitHub to pull your devcontainer Dockerfile 
+    # and run the job steps inside that environment
+    container:
+      image: python:3.10-slim # Use the same base image as your devcontainer
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y gcc g++ # Ensure C++ deps for OpenCV
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          chmod +x run.sh
+          ./run.sh test
+
