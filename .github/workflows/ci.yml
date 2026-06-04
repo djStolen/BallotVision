@@ -16,8 +16,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update && apt-get install -y gcc g++ # Ensure C++ deps for OpenCV
+          apt-get update && apt-get install -y gcc g++
+          pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest pytest-cov # Explicitly install test tools
 
       - name: Run tests
         run: |

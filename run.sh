@@ -80,9 +80,9 @@ fi
 case "$1" in
     test)
         echo -e "${BLUE}Running tests with pytest...${NC}"
-        pytest -v --cov=src/ballot_vision
-        ;;
-    lint)
+        # Use python3 -m pytest instead of just 'pytest'
+        python3 -m pytest -v --cov=src/ballot_vision
+        ;;    lint)
         echo -e "${BLUE}Checking code formatting (Black)...${NC}"
         black --check src/ tests/
         echo -e "${BLUE}Linting code (Flake8)...${NC}"
