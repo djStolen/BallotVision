@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     libgomp1 \
+    libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user (Standard best practice for Devcontainers)
