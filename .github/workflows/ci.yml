@@ -27,7 +27,7 @@ jobs:
             libsm6 \
             libxext6 \
             libxrender-dev \
-            cache 
+            ccache 
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-cov
