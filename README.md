@@ -66,3 +66,8 @@ The project uses pytest for validation logic. To run the tests, simply execute:
 ```
 Tests are automatically executed inside the container environment, ensuring that OpenCV and other system dependencies are correctly linked.
 
+# Run on test files
+
+```bash
+PYTHONPATH=src python3 process_files.py ./tests/testfiles/
+```

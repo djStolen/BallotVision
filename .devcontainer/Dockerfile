@@ -26,6 +26,8 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    ccache \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user (Standard best practice for Devcontainers)
