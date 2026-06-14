@@ -26,12 +26,30 @@ jobs:
             libglib2.0-0 \
             libsm6 \
             libxext6 \
-            libxrender-dev
+            libxrender-dev \
+            ccache 
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-cov
+
       - name: Run tests
         run: |
           chmod +x run.sh
           ./run.sh test
+
+      # INTEGRATED: Run the heavy ballot extraction step on GitHub's infrastructure
+      - name: Run OCR Processing
+        run: |
+          export PYTHONPATH=src
+          python3 process_files.py ./tests/testfiles/
+
+      # INTEGRATED: Gather the generated JSON mapping assets into a downloadable zip
+      - name: Upload OCR Results
+        if: always() # Ensures logs upload even if a script throws an intermittent warning
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocr-json-results
+          path: |
+            tests/testfiles/**/*.json
+          retention-days: 7
 

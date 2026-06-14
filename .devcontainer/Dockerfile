@@ -14,6 +14,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     libglib2.0-0 \
     doxygen \
     graphviz \
+    nano \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
@@ -25,6 +26,8 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    ccache \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user (Standard best practice for Devcontainers)
