@@ -1,7 +1,6 @@
 import os
 import cv2
 import numpy as np
-import pprint # for debugging
 
 # Force disabling oneDNN/MKLDNN to prevent framework attribute bugs
 os.environ["FLAGS_use_mkldnn"] = "0"
@@ -119,26 +118,6 @@ class PaddleOCREngine(OCREngine):
                         img_np = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
 
                     page_results = self.ocr.ocr(img_np)
-
-                    # ==========================================
-                    # DEBUG BLOCK: Print the raw output for Page 1
-                    # ==========================================
-                    if page_idx == 0:
-                        print(f"\n{'='*20} DEBUG RAW PADDLEOCR OUTPUT {'='*20}")
-                        print(f"File: {image_path}")
-                        print(f"Data Type: {type(page_results)}")
-                        if page_results is None:
-                            print("Result is None! PaddleOCR failed to process the image.")
-                        elif isinstance(page_results, list) and not page_results:
-                            print("Result is an empty list []. No text detected.")
-                        else:
-                            # Pretty print the first 2 lines to see the exact structure
-                            try:
-                                pprint.pprint(page_results[0][:2] if isinstance(page_results[0], list) else page_results, depth=5)
-                            except Exception as e:
-                                print(f"Raw data (unformatted): {page_results}")
-                        print(f"{'='*60}\n")
-                    # ==========================================
 
                     formatted_results.extend(self._parse_results(page_results, page_idx + 1))
 
