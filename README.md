@@ -4,7 +4,7 @@ BallotVision is an automated verification tool designed to ensure the integrity 
 
 ## User's Guide
 
-On Election forensics analysis: https://bit.ly/m/Zlatko (Author: https://zlatko.info/cv/)
+On Election forensics analysis: https://bit.ly/m/Zlatko (Author: https://zlatko.info/cv/ https://github.com/MyStatisticalConsultant)
 
 Library to be used: https://github.com/kkalininMI/EFToolkit
 
