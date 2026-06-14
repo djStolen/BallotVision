@@ -2,22 +2,31 @@
 
 BallotVision is an automated verification tool designed to ensure the integrity of election protocol data. By using image processing (OCR) and mathematical rule validation, it detects inconsistencies in scanned election documents.
 
-## Getting Started
+## User's Guide
+
+On Election forensics analysis: https://bit.ly/m/Zlatko (Author: https://zlatko.info/cv/)
+
+Library to be used: https://github.com/kkalininMI/EFToolkit
+
+More info and instructions to come.
+
+## Developer's Guide
+### Getting Started
 
 This project utilizes a containerized development environment via **DevPod** to ensure identical results across different machines.
 
-### Prerequisites
+#### Prerequisites
 *   [DevPod](https://devpod.sh/) installed and configured on your host machine.
 *   Docker (or a container runtime supported by DevPod).
 
-### Installation
+#### Installation
 1.  Clone the repository.
 2.  Make the control script executable:
 ```bash
 chmod +x run.sh
 ```
 
-## Development Workflow
+#### Development Workflow
 
 We use a central `run.sh` script to manage the development lifecycle. This script automatically handles container lifecycle, testing, and linting.
 
@@ -28,7 +37,7 @@ We use a central `run.sh` script to manage the development lifecycle. This scrip
 | `./run.sh docs` | Generates project documentation using Doxygen. |
 | `./run.sh shell` | Opens an interactive bash terminal inside the container. |
 
-## Project Structure
+#### Project Structure
 
 ```text
 BallotVision/
@@ -57,7 +66,7 @@ BallotVision/
 └── run.sh                       # Automation script for running the test suite
 ```
 
-# Testing
+#### Testing
 
 The project uses pytest for validation logic. To run the tests, simply execute:
 
@@ -66,7 +75,7 @@ The project uses pytest for validation logic. To run the tests, simply execute:
 ```
 Tests are automatically executed inside the container environment, ensuring that OpenCV and other system dependencies are correctly linked.
 
-# Run on test files
+#### Run on test files
 
 ```bash
 PYTHONPATH=src python3 process_files.py ./tests/testfiles/
