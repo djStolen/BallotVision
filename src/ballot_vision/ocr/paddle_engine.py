@@ -22,30 +22,42 @@ class PaddleOCREngine(OCREngine):
 
     def _parse_results(self, paddle_output: Any, page_num: int) -> List[Dict[str, Any]]:
         """
-        Recursively scans PaddleOCR's unpredictable output structure to find valid text lines.
-        Safely bypasses all 'too many values to unpack' structural errors.
+        Recursively scans PaddleOCR's output structure to find valid text lines.
+        Safely handles NumPy data types and mixed tuple/list nesting.
         """
         extracted = []
         if not paddle_output:
             return extracted
-            
+
         def search_tree(item):
-            # Signature of a valid line: list/tuple of length >= 2, 
-            # where the second element is a tuple/list of (text, confidence)
-            if isinstance(item, (list, tuple)) and len(item) >= 2:
-                text_block = item[1]
-                if isinstance(text_block, (list, tuple)) and len(text_block) >= 2:
-                    if isinstance(text_block[0], str) and isinstance(text_block[1], (float, int)):
-                        extracted.append({
-                            "text": text_block[0],
-                            "confidence": float(text_block[1]),
-                            "box": item[0],
-                            "page": page_num
-                        })
-                        return # Found the line signature, stop digging deeper
-                        
-            # Otherwise, if it's a list, keep traversing the tree
-            if isinstance(item, list):
+            # 1. Check if the current item matches the PaddleOCR line signature
+            if isinstance(item, (list, tuple)) and len(item) == 2:
+                box = item[0]
+                text_and_conf = item[1]
+
+                # Signature: [ [box_coordinates], ("Text string", confidence_score) ]
+                if isinstance(text_and_conf, (list, tuple)) and len(text_and_conf) == 2:
+                    text, conf = text_and_conf[0], text_and_conf[1]
+
+                    if isinstance(text, str):
+                        try:
+                            # FIX 1: Force cast numpy.float32/64 to standard Python float
+                            conf_float = float(conf)
+
+                            # FIX 2: Ensure the box looks like an array of coordinates (usually 4 points)
+                            if isinstance(box, (list, tuple)) and len(box) > 0:
+                                extracted.append({
+                                    "text": text,
+                                    "confidence": conf_float,
+                                    "box": box,
+                                    "page": page_num
+                                })
+                                return  # Successfully captured this line, stop digging deeper here
+                        except (ValueError, TypeError):
+                            pass
+
+            # FIX 3: Traverse BOTH lists and tuples to find nested lines
+            if isinstance(item, (list, tuple)):
                 for sub_item in item:
                     search_tree(sub_item)
 
