@@ -22,5 +22,5 @@
         "type": "volume"
       }
     ],
-    "postCreateCommand": "sudo chown -R devuser:devuser /home/devuser/.cache && pip install -r requirements.txt"
+    "postCreateCommand": "sudo chown -R devuser:devuser /home/devuser/.cache && pip install --upgrade pip && if grep -q avx2 /proc/cpuinfo; then pip install -r requirements.txt; else pip install -r requirements_noavx.txt; fi"
 }
