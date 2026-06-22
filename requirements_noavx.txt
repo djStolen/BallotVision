@@ -1,0 +1,9 @@
+-f https://www.paddlepaddle.org.cn/whl/linux/openblas/noavx/stable.html
+
+# Core dependencies for our pipeline
+opencv-python-headless
+numpy<2.0.0
+pandas
+paddlepaddle==2.6.2
+paddleocr>=2.7.0
+pymupdf
