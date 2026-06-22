@@ -1,0 +1,5 @@
+opencv-python-headless
+numpy<2.0.0
+pandas
+paddleocr==2.7.3
+pymupdf

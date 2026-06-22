@@ -1,7 +1,16 @@
-[tool.pytest.ini_options]
-pythonpath = ["src"]
+# 1. THE PACKAGING WORLD
+[project]
+name = "ballotvision-dev"
+version = "00.00.02"
 dependencies = [
-    "paddleocr",
+    "paddleocr==2.7.3",
     "pymupdf",
     "opencv-python-headless",
+    "pandas",
+    "numpy<2.0.0"
 ]
+
+# 2. THE TOOL-SPECIFIC WORLD (pytest)
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+# Keep only pytest-specific settings here!
