@@ -1,9 +1,6 @@
--f https://www.paddlepaddle.org.cn/whl/linux/openblas/noavx/stable.html
+# Inherit common requirements
+-r requirements-common.txt
 
-# Core dependencies for our pipeline
-opencv-python-headless
-numpy<2.0.0
-pandas
+# Force the No-AVX wheel for this specific environment
+-f https://www.paddlepaddle.org.cn/whl/linux/openblas/noavx/stable.html
 paddlepaddle==2.6.2
-paddleocr==2.7.3
-pymupdf
