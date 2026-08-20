@@ -36,6 +36,7 @@ We use a central `run.sh` script to manage the development lifecycle. This scrip
 | `./run.sh lint` | Checks code formatting with `black` and `flake8`. |
 | `./run.sh docs` | Generates project documentation using Doxygen. |
 | `./run.sh shell` | Opens an interactive bash terminal inside the container. |
+| `./run.sh vscode` | Opens an WebUI OpenVSCode inside the container. |
 
 #### Project Structure
 
