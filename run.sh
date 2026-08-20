@@ -22,6 +22,7 @@ show_help() {
     echo "  lint      Check code style with black and flake8"
     echo "  docs      Generate Doxygen documentation"
     echo "  shell     Open an interactive bash shell inside the container"
+    echo "  vscode    Open openvscode in browser"
     echo "  help      Show this help message"
 }
 
@@ -42,9 +43,15 @@ if [ ! -f "/.dockerenv" ] && [ -z "$DEVPOD" ]; then
     CMD_ARG="${1:-help}"
 
     echo -e "${BLUE}Starting DevPod workspace (this will build the image if needed)...${NC}"
-    devpod up . --id $WORKSPACE_NAME --ide none
+
+    if [ "$CMD_ARG" == "vscode" ]; then
+        devpod up . --id $WORKSPACE_NAME --ide openvscode &
+        echo -e "${BLUE}OpenVSCode IDE session started for workspace '$WORKSPACE_NAME'.${NC}"
+        exit 0
+    fi
 
     if [ "$CMD_ARG" == "shell" ]; then
+        devpod up . --id $WORKSPACE_NAME --ide none
         echo -e "${BLUE}Entering container shell...${NC}"
         devpod ssh $WORKSPACE_NAME
         exit 0
